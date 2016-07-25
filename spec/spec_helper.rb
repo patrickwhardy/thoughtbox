@@ -1,28 +1,32 @@
 
 RSpec.configure do |config|
+  # config.before(:all) do
+  #   current_user = User.where(email: "patrickwhardy@gmail.com", password_digest: " ").first_or_create!
+  # end
+
   config.before(:suite) do
-  DatabaseCleaner.clean_with(:truncation)
-end
+    DatabaseCleaner.clean_with(:truncation)
+  end
 
 
-config.before(:each) do
-  DatabaseCleaner.strategy = :transaction
-end
+  config.before(:each) do
+    DatabaseCleaner.strategy = :transaction
+  end
 
 
-config.before(:each, :js => true) do
-  DatabaseCleaner.strategy = :truncation
-end
+  config.before(:each, :js => true) do
+    DatabaseCleaner.strategy = :truncation
+  end
 
 
-config.before(:each) do
-  DatabaseCleaner.start
-end
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
 
 
-config.after(:each) do
-  DatabaseCleaner.clean
-end
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
 
 # config.include FactoryGirl::Syntax::Methods
 # config.use_transactional_fixtures = false
@@ -56,6 +60,6 @@ module SpecHelpers
     fill_in "Email", with: user.email
     fill_in "Password", with: "password"
     click_on "Log in"
-    user
+    return user
   end
 end
