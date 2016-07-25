@@ -1,0 +1,25 @@
+<h1>Create a new Link</h1>
+<%= form_for Link.new, url: links_path, method: :post do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <%= f.label :url %>
+  <%= f.text_field :url %>
+  <%= f.submit "Create new link", class: "btn btn-success" %>
+<% end %>
+
+<h1>All links for <%= current_user.email if current_user %></h1>
+
+<div class="link-actions">
+  <button id="alphabetical" class="btn btn-default">Sort alphabetically</button>
+  <button id="read-links" class="btn btn-default">Only read links</button>
+  <button id="unread-links" class="btn btn-default">Only unread links</button>
+  <button id="all-links" class="btn btn-default">All links</button>
+</div>
+
+<div class="links">
+  <%= @links.each do |link| %>
+    <%= link_to link.title, link.url %>
+    <button id="change-status" class="btn btn-default">Change Status</button>
+    <%= link_to "Edit link", edit_link_path(link) %>
+  <% end %>
+</div>
