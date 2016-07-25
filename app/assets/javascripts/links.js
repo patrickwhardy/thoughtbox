@@ -25,6 +25,12 @@ $(document).ready(function(){
     showAllLinks();
     updateListStatus("all");
   });
+
+  $('#alphabetical').on("click", function(){
+    var sortedLinks = sortAlphabetically();
+    $('.links').empty();
+    addSortedLinks(sortedLinks);
+  });
 });
 
 function changeStatus(link, status, listFilter) {
@@ -76,8 +82,29 @@ function updateListStatus(status) {
 }
 
 function showAllLinks() {
-  var allLinks = $('.links').children(0);
-  for(var i=0; i<allLinks.length; i++) {
-    allLinks.eq(i).show();
+  var links = $('.links').children(0);
+  for(var i=0; i<links.length; i++) {
+    links.eq(i).show();
+  }
+}
+
+function sortAlphabetically() {
+  var sortedLinks = $('.links').children(0).sort(function(linkA, linkB){
+    var nameA = linkA.firstChild.nextSibling.innerText.toLowerCase();
+    var nameB = linkB.firstChild.nextSibling.innerText.toLowerCase();
+    if (nameA < nameB) {
+      return -1;
+    } if (nameA > nameB) {
+      return 1;
+    }
+      return 0;
+  });
+  return sortedLinks;
+}
+
+function addSortedLinks(sortedLinks) {
+  var links = $('.links');
+  for(var i = 0; i < sortedLinks.length; i++) {
+    links.append(sortedLinks[i]);
   }
 }
