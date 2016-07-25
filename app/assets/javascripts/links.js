@@ -31,6 +31,19 @@ $(document).ready(function(){
     $('.links').empty();
     addSortedLinks(sortedLinks);
   });
+
+  $( "#link_filter" ).keyup(function(e) {
+    $('.links').children(0).each(function(){
+      var searchStr = $('#link_filter').val().toLowerCase();
+      var title = $(this).children().first().text().toLowerCase();
+      if (title.indexOf(searchStr) !== -1) {
+        $(this).show();
+      } else {
+        $(this).hide();
+      }
+    });
+  });
+
 });
 
 function changeStatus(link, status, listFilter) {
