@@ -20,6 +20,11 @@ $(document).ready(function(){
     showLinksByStatus("unread");
       updateListStatus("unread-list");
   });
+
+  $('#all-links').on("click", function(){
+    showAllLinks();
+    updateListStatus("all");
+  });
 });
 
 function changeStatus(link, status, listFilter) {
@@ -67,5 +72,12 @@ function updateListStatus(status) {
   links.attr("class", "links");
   if (status !== "all") {
     links.addClass(status);
+  }
+}
+
+function showAllLinks() {
+  var allLinks = $('.links').children(0);
+  for(var i=0; i<allLinks.length; i++) {
+    allLinks.eq(i).show();
   }
 }
