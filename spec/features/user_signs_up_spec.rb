@@ -17,11 +17,18 @@ RSpec.feature "A user signs up for an account" do
   describe "invalid signup" do
     context "not a unique email" do
       scenario "sees form again" do
-        create(:user, email: "oldemail@example.com")
         visit '/'
-        click_on "Sign up"
+        click_on "Sign Up"
 
-        fill_in "Email", with: "oldemail@example.com"
+        fill_in "Email", with: "email@example.com"
+        fill_in "Password", with: "password"
+        fill_in "Password confirmation", with: "password"
+        click_on "Create account"
+
+        visit '/'
+        click_on "Sign Up"
+
+        fill_in "Email", with: "email@example.com"
         fill_in "Password", with: "password"
         fill_in "Password confirmation", with: "password"
         click_on "Create account"
@@ -33,7 +40,7 @@ RSpec.feature "A user signs up for an account" do
     context "passwords do not match" do
       scenario "sees form again" do
         visit '/'
-        click_on "Sign up"
+        click_on "Sign Up"
 
         fill_in "Email", with: "newuser@example.com"
         fill_in "Password", with: "password"
