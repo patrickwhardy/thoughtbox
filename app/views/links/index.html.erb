@@ -18,7 +18,7 @@
 
 <div class="links">
   <% @links.each do |link| %>
-  <br><div class="link", id= ="link-<%= link.id %>">
+  <br><div class="", id="<%= link.id %>">
     <%= link_to link.title, link.url %><br>
     <% if link.read %>
     <button id="change-status" class="btn btn-default">Mark as Unread</button>

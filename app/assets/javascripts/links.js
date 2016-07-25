@@ -1,14 +1,13 @@
 $(document).ready(function(){
   $('.links').on("click", "button#change-status", function(){
     var button = $(this);
-    var status = getStatus(button);
-    var id = getId(button);
+    var status = $(button).parent().attr('class');
+    var id = $(button).parent().attr('id');
     var new_status = getNewStatus(status);
-    var listFilter = getCurrentFilter();
     $.ajax({type: 'PATCH',
             url: '/api/v1/links/'+id,
             data: {link: {read: new_status}},
-            success: changeStatus($(this).parent(), status, listFilter)
+            success: changeStatus($(this).parent(), status, currentFilter())
           });
   });
 
@@ -38,24 +37,12 @@ function changeStatus(link, status, listFilter) {
   // }
 }
 
-function getStatus(button) {
-  var linkStatus = $(button).parent().attr('class');
-  var sind = linkStatus.indexOf(" ");
-  return linkStatus.slice(sind+1);
-}
-
-function getId(button) {
-  var id = $(button).parent().attr('id');
-  var sid = id.indexOf("-");
-  return id.slice(sid+1);
-}
-
 function getNewStatus(status) {
   if (status === "read") { return false; }
   return true;
 }
 
-function getCurrentFilter(){
+function currentFilter(){
   var links = $('.links');
   if ($(links).hasClass("unread-list")) { return "unread"; }
   if ($(links).hasClass("read-list"))   { return "read"; }
