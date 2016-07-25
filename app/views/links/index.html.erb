@@ -14,12 +14,14 @@
   <button id="read-links" class="btn btn-default">Only read links</button>
   <button id="unread-links" class="btn btn-default">Only unread links</button>
   <button id="all-links" class="btn btn-default">All links</button>
-</div>
+</div><br>
 
 <div class="links">
-  <%= @links.each do |link| %>
-    <%= link_to link.title, link.url %>
+  <% @links.each do |link| %>
+  <br><div class="link", id= ="link-<%= link.id %>">
+    <%= link_to link.title, link.url %><br>
     <button id="change-status" class="btn btn-default">Change Status</button>
-    <%= link_to "Edit link", edit_link_path(link) %>
+    <%= link_to "Edit link", edit_link_path(link) %><br>
+  </div>
   <% end %>
 </div>
