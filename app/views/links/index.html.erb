@@ -18,14 +18,14 @@
 
 <div class="links">
   <% @links.each do |link| %>
-  <br><div class="", id="<%= link.id %>">
-    <%= link_to link.title, link.url %><br>
+  <div class="", id="<%= link.id %>">
+    <%= link_to link.title, link.url %>
     <% if link.read %>
     <button id="change-status" class="btn btn-default">Mark as Unread</button>
     <% else %>
     <button id="change-status" class="btn btn-default">Mark as Read</button>
     <% end %>
-    <%= link_to "Edit link", edit_link_path(link) %><br>
+    <%= link_to "Edit link", edit_link_path(link) %>
   </div>
   <% end %>
 </div>
