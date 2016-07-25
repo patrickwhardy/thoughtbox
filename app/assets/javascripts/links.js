@@ -1,7 +1,5 @@
 $(document).ready(function(){
-  console.log("hi");
-  $('.links').on("click", "button#change-status", function(e){
-    console.log("clicked");
+  $('.links').on("click", "button#change-status", function(){
     var button = $(this);
     var status = getStatus(button);
     var id = getId(button);
@@ -12,7 +10,6 @@ $(document).ready(function(){
             data: {link: {read: new_status}},
             success: changeStatus($(this).parent(), status, listFilter)
           });
-
   });
 
   $('#read-links').on("click", function(){
@@ -36,9 +33,9 @@ function changeStatus(link, status, listFilter) {
     $(link).addClass("read");
     $(link).children("button")[0].innerHTML = "Mark as Unread";
   }
-  if (listFilter !== "all") {
-    showOnlyLinks(listFilter);
-  }
+  // if (listFilter !== "all") {
+  //   showOnlyLinks(listFilter);
+  // }
 }
 
 function getStatus(button) {

@@ -20,7 +20,11 @@
   <% @links.each do |link| %>
   <br><div class="link", id= ="link-<%= link.id %>">
     <%= link_to link.title, link.url %><br>
-    <button id="change-status" class="btn btn-default">Change Status</button>
+    <% if link.read %>
+    <button id="change-status" class="btn btn-default">Mark as Unread</button>
+    <% else %>
+    <button id="change-status" class="btn btn-default">Mark as Read</button>
+    <% end %>
     <%= link_to "Edit link", edit_link_path(link) %><br>
   </div>
   <% end %>
